@@ -1,13 +1,14 @@
-import Button from '../../../shared/ui/Button/Button';
-import { useDeletePlaceById } from '../hooks/useDeletePlaceById';
+import { useState } from 'react';
 import { IPlaceDto } from '../type/type';
+import ModalDeleteButton from './ModalDeleteButton';
+import Button from '../../../shared/ui/Button/Button';
 
 type PlaceCardProps = {
   place: IPlaceDto;
 };
 
 const PlaceCard = ({ place }: PlaceCardProps): JSX.Element => {
-  const { handleDelete: deletePlace, isPending } = useDeletePlaceById();
+  const [activeDeleteModal, setActiveDeleteModal] = useState(false);
 
   return (
     <div className="PlaceCard">
@@ -17,12 +18,17 @@ const PlaceCard = ({ place }: PlaceCardProps): JSX.Element => {
       <div>{place.latitude}</div>
       <div>{place.longitude}</div>
       <Button
-        className="rounded p-2 border border-teal-500 disabled:opacity-50"
         title="Удалить"
-        type="button"
-        onClick={() => deletePlace(place.id)}
-        disabled={isPending}
+        onClick={() => setActiveDeleteModal(true)}
+        className="rounded p-2 bg-green-700 disabled:opacity-50"
       />
+      {activeDeleteModal && (
+        <ModalDeleteButton
+          place={place}
+          activeDeleteModal={activeDeleteModal}
+          setActiveDeleteModal={setActiveDeleteModal}
+        />
+      )}
     </div>
   );
 };
