@@ -21,6 +21,7 @@ const AddPlaceForm = (): JSX.Element => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<PlaceWithoutId>({
     defaultValues: {
       name: '',
@@ -34,7 +35,12 @@ const AddPlaceForm = (): JSX.Element => {
   const { handleCreate, isPending } = useAddPlace();
 
   return (
-    <form onSubmit={handleSubmit(handleCreate)}>
+    <form
+      onSubmit={handleSubmit((data) => {
+        handleCreate(data);
+        reset();
+      })}
+    >
       <label htmlFor="name">
         name
         <input {...register('name')} id="name" />
