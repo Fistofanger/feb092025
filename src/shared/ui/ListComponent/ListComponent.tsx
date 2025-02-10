@@ -7,7 +7,7 @@ const ListComponent = <T,>({
   data,
   render,
 }: ListComponentProps<T>): JSX.Element => {
-  return <div>{data.map((item) => render(item))}</div>;
+  return <>{data.map((item) => render(item))}</>;
 };
 
 export default ListComponent;
