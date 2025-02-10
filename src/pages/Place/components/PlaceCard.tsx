@@ -9,6 +9,7 @@ type PlaceCardProps = {
 
 const PlaceCard = ({ place }: PlaceCardProps): JSX.Element => {
   const [activeDeleteModal, setActiveDeleteModal] = useState(false);
+  console.log(`PostCard ${place.id}`);
 
   return (
     <div className="PlaceCard">
@@ -20,7 +21,7 @@ const PlaceCard = ({ place }: PlaceCardProps): JSX.Element => {
       <Button
         title="Удалить"
         onClick={() => setActiveDeleteModal(true)}
-        className="rounded p-2 bg-green-700 disabled:opacity-50"
+        className="rounded p-2 bg-[#45a049] disabled:opacity-50"
       />
       {activeDeleteModal && (
         <ModalDeleteButton

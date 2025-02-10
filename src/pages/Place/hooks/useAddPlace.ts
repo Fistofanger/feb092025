@@ -6,17 +6,13 @@ import { queryClient } from '../../../shared/api/queryClient';
 export const useAddPlace = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: placesListApi.addPlace,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['places', 'all'] });
+    async onSettled() {
+      await queryClient.invalidateQueries({ queryKey: ['places', 'all'] });
     },
   });
 
   const handleCreate = (data: PlaceWithoutId) => {
-    
-
     mutate(data);
-
-   
   };
 
   return {
