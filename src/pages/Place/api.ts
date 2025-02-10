@@ -31,4 +31,17 @@ export const placesListApi = {
     });
     return response.placeId;
   },
+  updatePlace: async (place: PlaceWithoutId & { id: PlaceId }) => {
+    const response = await fetchApiInstance<{
+      place: IPlaceDto;
+      message: string;
+    }>(`/places/${place.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(place),
+    });
+    return response.place;
+  },
 };

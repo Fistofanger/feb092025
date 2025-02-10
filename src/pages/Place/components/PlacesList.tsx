@@ -12,7 +12,11 @@ const PlacesList = (): JSX.Element => {
   const handleRender = (item: IPlaceDto) => (
     <PlaceCard key={item.id} place={item} />
   );
-  return <>{places && <ListComponent data={places} render={handleRender} />}</>;
+  return (
+    <div className={'flex flex-wrap justify-center gap-10'}>
+      {places && <ListComponent data={places} render={handleRender} />}
+    </div>
+  );
 };
 
 export default PlacesList;
